@@ -2,16 +2,26 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import WelcomeMessage from './components/WelcomeMessage' // ✅ Step 3: Import your new component
+
+import WelcomeMessage from './components/WelcomeMessage'
+import Header from './components/Header'
+import MainContent from './components/MainContent'
+import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      {/* ✅ Step 3: Use the new component here */}
+      {/* ✅ New Components */}
+      <Header />
+      <MainContent />
+      <Footer />
+
+      {/* ✅ Previous WelcomeMessage component */}
       <WelcomeMessage />
 
+      {/* ✅ Vite default content */}
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -38,4 +48,3 @@ function App() {
 }
 
 export default App
-
