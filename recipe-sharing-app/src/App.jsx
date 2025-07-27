@@ -5,6 +5,8 @@ import SearchBar from './components/SearchBar';
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeDetail from './components/RecipeDetail';
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
 const App = () => {
   const setRecipes = useRecipeStore((state) => state.setRecipes);
@@ -13,6 +15,7 @@ const App = () => {
     const sampleRecipes = [
       { id: 1, title: 'Spaghetti Bolognese', description: 'A classic Italian dish.' },
       { id: 2, title: 'Chicken Curry', description: 'Spicy and flavorful.' },
+      { id: 3, title: 'Veggie Stir Fry', description: 'Quick and healthy.' },
     ];
     setRecipes(sampleRecipes);
   }, [setRecipes]);
@@ -26,6 +29,8 @@ const App = () => {
           <Route path="/" element={<RecipeList />} />
           <Route path="/add" element={<AddRecipeForm />} />
           <Route path="/recipes/:id" element={<RecipeDetail />} />
+          <Route path="/favorites" element={<FavoritesList />} />
+          <Route path="/recommendations" element={<RecommendationsList />} />
         </Routes>
       </div>
     </Router>
