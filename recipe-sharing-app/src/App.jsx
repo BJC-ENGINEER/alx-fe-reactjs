@@ -1,29 +1,27 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import SearchBar from './components/SearchBar';
 import RecipeList from './components/RecipeList';
-import AddRecipeForm from './components/AddRecipeForm';
-import RecipeDetails from './components/RecipeDetails';
+import { useRecipeStore } from './store/recipeStore';
 
-function App() {
+const App = () => {
+  const setRecipes = useRecipeStore((state) => state.setRecipes);
+
+  useEffect(() => {
+    // Replace with real data or fetch from API
+    const sampleRecipes = [
+      { title: 'Spaghetti Bolognese', description: 'A classic Italian dish.' },
+      { title: 'Chicken Curry', description: 'Spicy and flavorful.' },
+    ];
+    setRecipes(sampleRecipes);
+  }, [setRecipes]);
+
   return (
-    <BrowserRouter> {/* ✅ Satisfies the checker */}
-      <div style={{ padding: '20px' }}>
-        <h1><Link to="/">Recipe Sharing App</Link></h1>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <AddRecipeForm />
-                <hr />
-                <RecipeList />
-              </>
-            }
-          />
-          <Route path="/recipes/:id" element={<RecipeDetails />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <h1>Recipe Sharing App</h1>
+      <SearchBar />
+      <RecipeList />
+    </div>
   );
-}
+};
 
 export default App;
