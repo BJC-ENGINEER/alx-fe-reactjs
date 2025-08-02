@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { searchUsers } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 
 const Search = () => {
   const [formData, setFormData] = useState({
     username: "",
     location: "",
-    minRepos: ""
+    minRepos: "",
   });
 
   const [results, setResults] = useState([]);
@@ -13,7 +13,7 @@ const Search = () => {
   const [error, setError] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
@@ -25,7 +25,7 @@ const Search = () => {
     setResults([]);
 
     try {
-      const data = await searchUsers(formData);
+      const data = await fetchUserData(formData);
       setResults(data.items);
     } catch (err) {
       setError(true);
@@ -74,13 +74,22 @@ const Search = () => {
       </form>
 
       {loading && <p className="text-center mt-4">Loading...</p>}
-      {error && <p className="text-center text-red-500 mt-4">Something went wrong. Try again.</p>}
+      {error && (
+        <p className="text-center text-red-500 mt-4">Looks like we cant find the user</p>
+      )}
 
       {results.length > 0 && (
         <div className="mt-6 space-y-4">
           {results.map((user) => (
-            <div key={user.id} className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg shadow">
-              <img src={user.avatar_url} alt="avatar" className="w-16 h-16 rounded-full" />
+            <div
+              key={user.id}
+              className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg shadow"
+            >
+              <img
+                src={user.avatar_url}
+                alt="avatar"
+                className="w-16 h-16 rounded-full"
+              />
               <div>
                 <h3 className="text-lg font-semibold">{user.login}</h3>
                 <a
