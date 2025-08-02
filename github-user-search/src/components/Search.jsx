@@ -1,4 +1,3 @@
-// src/components/Search.jsx
 import React, { useState } from "react";
 import { fetchUserData } from "../services/githubService";
 
@@ -11,6 +10,7 @@ const Search = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username) return;
+
     setLoading(true);
     setError(false);
     setUserData(null);
@@ -39,12 +39,21 @@ const Search = () => {
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p>Looks like we can't find the user.</p>}
+      {error && <p>Looks like we cant find the user</p>}
       {userData && (
         <div style={{ marginTop: "1rem" }}>
-          <img src={userData.avatar_url} alt="avatar" width={100} style={{ borderRadius: "50%" }} />
+          <img
+            src={userData.avatar_url}
+            alt="avatar"
+            width={100}
+            style={{ borderRadius: "50%" }}
+          />
           <h2>{userData.name || userData.login}</h2>
-          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
+          <a
+            href={userData.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             View Profile
           </a>
         </div>
